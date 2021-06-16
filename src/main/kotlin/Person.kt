@@ -6,7 +6,7 @@ class Person(val firstName: String = "Peter1", val lastName: String = "Parker1")
 
 
     var nickname : String? = null
-        set(value) { //faunction behaviour when set is called
+        set(value) { //function behaviour when set is called
             //logout if nickname is set
             field = value
             println("the new nickname is $value")

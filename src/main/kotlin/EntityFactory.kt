@@ -1,9 +1,26 @@
+import java.util.*
+
 interface IdProvider{
     fun getId(): String
 }
 
+enum class EntityType{
+    EASY, MEDIUM, HARD;
+
+    fun getFormattedName() = name.toLowerCase().capitalize() //Medium
+}
+
 object EntityFactory{
-    fun create() = Entity("id", "name")
+    //fun create() = Entity("id", "name")
+    fun create(type: EntityType):Entity {
+        val id = UUID.randomUUID().toString()
+        val name = when(type){
+            EntityType.EASY -> type.name
+            EntityType.MEDIUM -> type.getFormattedName()
+            EntityType.HARD -> "Hard"
+        }
+        return Entity(id , name)
+    }
 }
 
 //class Entity private constructor(val id :String){
@@ -30,7 +47,10 @@ fun main (){
    // val entity = Entity.Factory.create() //possible in kotlin
     //Entity.id
 
-    val entity = EntityFactory.create()
+    val entity = EntityFactory.create(EntityType.EASY)
     println(entity)
+
+    val mediumEntity = EntityFactory.create(EntityType.MEDIUM)
+    println(mediumEntity)
 
 }
